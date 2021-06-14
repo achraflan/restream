@@ -1,0 +1,41 @@
+{
+  "name": "Chemin",
+  "fields": [
+    {
+      "fieldName": "cheminNon",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TypeChemin",
+      "fieldValues": "Direct,Embed"
+    },
+    {
+      "fieldName": "cheminValide",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "cheminMarche",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "chaine",
+      "otherEntityRelationshipName": "chemin",
+      "javadoc": "Another side of the same relationship",
+      "relationshipName": "chaine"
+    }
+  ],
+  "entityTableName": "chemin",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210614092931"
+}

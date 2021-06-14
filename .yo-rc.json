@@ -41,6 +41,8 @@
     "packageFolder": "com/restream/api",
     "jwtSecretKey": "M2M3MzdmMWVlNjNjZGI1OGNjZWFhZjE5NzJmYjA0NGFlOTMyZTMyNmFiNWNhNTE1NmM3MWM0MDEyZmY0MWRlMTMxZDk5NTIxZjIyZDNkZGNjMjk1OTkzMDJhM2RiY2QzZDQ0NWI3ZDlmYzA2MzNhMGY0YWUyOTNjM2VkNzA3MmU=",
     "clientPackageManager": "npm",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["Chaine", "Categorie", "Tag", "Chemin"],
+    "lastLiquibaseTimestamp": 1623662971000
   }
 }

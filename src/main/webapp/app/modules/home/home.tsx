@@ -13,9 +13,6 @@ export const Home = (props: IHomeProp) => {
 
   return (
     <Row>
-      <Col md="3" className="pad">
-        <span className="hipster rounded" />
-      </Col>
       <Col md="9">
         <h2>Welcome, Java Hipster!</h2>
         <p className="lead">This is your homepage</p>

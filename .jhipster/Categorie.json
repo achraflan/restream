@@ -1,0 +1,28 @@
+{
+  "name": "Categorie",
+  "fields": [
+    {
+      "fieldName": "categorieNom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categorieImage",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categorieActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "categorie",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210614092929"
+}

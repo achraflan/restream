@@ -1,0 +1,56 @@
+entity Chaine {
+	chaineNom String,
+    chaineImage String,
+    chaineActive Boolean,
+}
+
+entity Categorie {
+	categorieNom String,
+    categorieImage String,
+    categorieActive Boolean,
+}
+
+entity Tag {
+	tagNom String,
+}
+
+entity Chemin {
+	cheminNon String,
+    type TypeChemin,
+    cheminValide Boolean,
+    cheminMarche Boolean,
+}
+
+enum TypeChemin {
+    Direct, Embed
+}
+
+relationship ManyToMany {
+	Chaine{tags(tagNom)} to Tag{chaines}
+}
+
+relationship OneToMany {
+	Chaine to
+	/**
+	* Another side of the same relationship
+	*/
+	Chemin{chaine}
+}
+
+relationship ManyToOne {
+	Chaine{categorie} to Categorie
+}
+
+
+// Set pagination options
+paginate Chaine, Chemin with infinite-scroll
+paginate Categorie, Tag with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

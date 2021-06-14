@@ -75,6 +75,7 @@
     "bootstrap": "4.6.0",
     "bootswatch": "4.6.0",
     "dayjs": "1.10.4",
+    "hls.js": "^1.0.7",
     "loaders.css": "0.1.2",
     "lodash": "4.17.21",
     "path-browserify": "1.0.1",

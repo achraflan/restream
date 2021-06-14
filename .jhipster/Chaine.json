@@ -1,0 +1,49 @@
+{
+  "name": "Chaine",
+  "fields": [
+    {
+      "fieldName": "chaineNom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chaineImage",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chaineActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "chemin",
+      "otherEntityRelationshipName": "chaine",
+      "relationshipName": "chemin"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "chaine",
+      "relationshipName": "categorie"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "chaines",
+      "relationshipName": "tags",
+      "otherEntityField": "tagNom",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "chaine",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210614092928"
+}
