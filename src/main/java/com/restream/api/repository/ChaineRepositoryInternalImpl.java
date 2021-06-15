@@ -5,6 +5,7 @@ import static org.springframework.data.relational.core.query.Query.query;
 
 import com.restream.api.domain.Chaine;
 import com.restream.api.domain.Tag;
+import com.restream.api.repository.CheminRepository;
 import com.restream.api.repository.rowmapper.CategorieRowMapper;
 import com.restream.api.repository.rowmapper.ChaineRowMapper;
 import com.restream.api.service.EntityManager;
@@ -47,18 +48,21 @@ class ChaineRepositoryInternalImpl implements ChaineRepositoryInternal {
     private static final Table categorieTable = Table.aliased("categorie", "categorie");
 
     private static final EntityManager.LinkTable tagsLink = new LinkTable("rel_chaine__tags", "chaine_id", "tags_id");
+    private final CheminRepository cheminRepository;
 
     public ChaineRepositoryInternalImpl(
         R2dbcEntityTemplate template,
         EntityManager entityManager,
         CategorieRowMapper categorieMapper,
-        ChaineRowMapper chaineMapper
+        ChaineRowMapper chaineMapper,
+        CheminRepository cheminRepository
     ) {
         this.db = template.getDatabaseClient();
         this.r2dbcEntityTemplate = template;
         this.entityManager = entityManager;
         this.categorieMapper = categorieMapper;
         this.chaineMapper = chaineMapper;
+        this.cheminRepository = cheminRepository;
     }
 
     @Override
@@ -129,6 +133,15 @@ class ChaineRepositoryInternalImpl implements ChaineRepositoryInternal {
     private Chaine process(Row row, RowMetadata metadata) {
         Chaine entity = chaineMapper.apply(row, "e");
         entity.setCategorie(categorieMapper.apply(row, "categorie"));
+        // entity.setChemins();
+        // cheminRepository.findByChaine(entity.getId()).then(System.out::print);
+        cheminRepository
+            .findByChaine(entity.getId())
+            .subscribe(
+                value -> entity.addChemin(value),
+                error -> error.printStackTrace(),
+                () -> System.out.print("completed without a value")
+            );
         return entity;
     }
 

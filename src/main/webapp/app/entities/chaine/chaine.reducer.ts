@@ -16,7 +16,6 @@ import { IChemin } from 'app/shared/model/chemin.model';
 
 export const ACTION_TYPES = {
   FETCH_CHAINE_LIST: 'chaine/FETCH_CHAINE_LIST',
-  FETCH_CHEMIN_LIST: 'chaine/FETCH_CHEMIN_LIST',
   FETCH_CHAINE: 'chaine/FETCH_CHAINE',
   CREATE_CHAINE: 'chaine/CREATE_CHAINE',
   UPDATE_CHAINE: 'chaine/UPDATE_CHAINE',
@@ -44,7 +43,6 @@ export default (state: ChaineState = initialState, action): ChaineState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_CHAINE_LIST):
     case REQUEST(ACTION_TYPES.FETCH_CHAINE):
-    case REQUEST(ACTION_TYPES.FETCH_CHEMIN_LIST):
       return {
         ...state,
         errorMessage: null,
@@ -63,7 +61,6 @@ export default (state: ChaineState = initialState, action): ChaineState => {
       };
     case FAILURE(ACTION_TYPES.FETCH_CHAINE_LIST):
     case FAILURE(ACTION_TYPES.FETCH_CHAINE):
-    case FAILURE(ACTION_TYPES.FETCH_CHEMIN_LIST):
     case FAILURE(ACTION_TYPES.CREATE_CHAINE):
     case FAILURE(ACTION_TYPES.UPDATE_CHAINE):
     case FAILURE(ACTION_TYPES.PARTIAL_UPDATE_CHAINE):
@@ -84,14 +81,6 @@ export default (state: ChaineState = initialState, action): ChaineState => {
         links,
         entities: loadMoreDataWhenScrolled(state.entities, action.payload.data, links),
         totalItems: parseInt(action.payload.headers['x-total-count'], 10),
-      };
-    }
-    case SUCCESS(ACTION_TYPES.FETCH_CHEMIN_LIST): {
-      const links = parseHeaderForLinks(action.payload.headers.link);
-      return {
-        ...state,
-        loading: false,
-        entities: action.payload.data,
       };
     }
     case SUCCESS(ACTION_TYPES.FETCH_CHAINE):
@@ -134,16 +123,6 @@ export const getEntities: ICrudGetAllAction<IChaine> = (page, size, sort) => {
   return {
     type: ACTION_TYPES.FETCH_CHAINE_LIST,
     payload: axios.get<IChaine>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`),
-  };
-};
-
-export const getEntityChemin: ICrudGetAction<IChemin> = id => {
-  const requestUrl = `${apiUrl}/${id}/chemins`;
-  /* eslint no-console: off */
-  console.log('requestUrl:', requestUrl);
-  return {
-    type: ACTION_TYPES.FETCH_CHEMIN_LIST,
-    payload: axios.get<IChemin>(requestUrl),
   };
 };
 

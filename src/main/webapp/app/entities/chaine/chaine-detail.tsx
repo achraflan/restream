@@ -7,7 +7,7 @@ import {} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntity, getEntityChemin } from './chaine.reducer';
+import { getEntity } from './chaine.reducer';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
 export interface IChaineDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
@@ -44,6 +44,23 @@ export const ChaineDetail = (props: IChaineDetailProps) => {
             : null}
           .
         </CardText>
+        <CardText>
+          Liste des chemins :{' '}
+          {chaineEntity.chemins
+            ? chaineEntity.chemins.map(val => (
+                <Button
+                  style={{ margin: '5px' }}
+                  key={val.id}
+                  tag={Link}
+                  to={`/chemin/${val.id}`}
+                  active={val.cheminMarche && val.cheminValide}
+                  color={val.cheminMarche && val.cheminValide ? 'success' : 'danger'}
+                >
+                  {val.cheminNon.length > 20 ? val.cheminNon.substring(1, 20) + ' ...' : val.cheminNon}
+                </Button>
+              ))
+            : null}
+        </CardText>
         <Button tag={Link} to="/chaine" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
         </Button>
@@ -60,7 +77,7 @@ const mapStateToProps = ({ chaine }: IRootState) => ({
   chaineEntity: chaine.entity,
 });
 
-const mapDispatchToProps = { getEntity, getEntityChemin };
+const mapDispatchToProps = { getEntity };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

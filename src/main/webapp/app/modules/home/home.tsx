@@ -1,94 +1,122 @@
 import './home.scss';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 
 import { connect } from 'react-redux';
-import { Row, Col, Alert } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
+import { ListGroup, ListGroupItem } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardHeader, CardText, CardBody } from 'reactstrap';
+import VideoPlayer from '../../shared/util/videoPlayer';
 
-export type IHomeProp = StateProps;
+import { getEntities as getCategories } from '../../entities/categorie/categorie.reducer';
+import { getEntities as getChanels } from '../../entities/chaine/chaine.reducer';
+
+export interface IHomeProp extends StateProps, DispatchProps {}
 
 export const Home = (props: IHomeProp) => {
-  const { account } = props;
+  const [activeChaine, setActiveChaine] = useState(null);
+  const [activeLink, setActiveLink] = useState(null);
 
+  const getChaines = event => {
+    /* eslint-disable no-console */
+    console.log('we will use this to get channels.');
+    setActiveChaine(null);
+    props.getChanels();
+  };
+
+  const toggle = chaine => {
+    if (activeChaine !== chaine) {
+      setActiveLink(null);
+      setActiveChaine(chaine);
+      if (chaine.chemins.length > 0) setActiveLink(chaine.chemins[0]);
+    }
+  };
+
+  const getAllEntities = () => {
+    props.getCategories(0, 20, '');
+  };
+
+  useEffect(() => {
+    getAllEntities();
+  }, []);
+
+  const { categorieList, loadingCategorieList, account, chainesList, loadingChainesList } = props;
   return (
     <Row>
-      <Col md="9">
-        <h2>Welcome, Java Hipster!</h2>
-        <p className="lead">This is your homepage</p>
-        {account && account.login ? (
-          <div>
-            <Alert color="success">You are logged in as user {account.login}.</Alert>
-          </div>
+      <Col md="3">
+        {categorieList && categorieList.length > 0 ? (
+          <ListGroup>
+            <ListGroupItem disabled className="justify-content-between" style={{ color: '#fff', background: '#28a0d6' }}>
+              Categorie
+            </ListGroupItem>
+            {categorieList.map(categorie => (
+              <ListGroupItem key={categorie.id} className="justify-content-between" onClick={getChaines}>
+                {categorie.categorieNom}{' '}
+              </ListGroupItem>
+            ))}
+          </ListGroup>
         ) : (
-          <div>
-            <Alert color="warning">
-              If you want to
-              <span>&nbsp;</span>
-              <Link to="/login" className="alert-link">
-                {' '}
-                sign in
-              </Link>
-              , you can try the default accounts:
-              <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
-              <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
-            </Alert>
-
-            <Alert color="warning">
-              You do not have an account yet?&nbsp;
-              <Link to="/account/register" className="alert-link">
-                Register a new account
-              </Link>
-            </Alert>
-          </div>
+          !loadingCategorieList && <div className="alert alert-warning">No Categories found</div>
         )}
-        <p>If you have any question on JHipster:</p>
-
-        <ul>
-          <li>
-            <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">
-              JHipster homepage
-            </a>
-          </li>
-          <li>
-            <a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">
-              JHipster on Stack Overflow
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">
-              JHipster bug tracker
-            </a>
-          </li>
-          <li>
-            <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-              JHipster public chat room
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">
-              follow @jhipster on Twitter
-            </a>
-          </li>
-        </ul>
-
-        <p>
-          If you like JHipster, do not forget to give us a star on{' '}
-          <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          !
-        </p>
+      </Col>
+      <Col md="9">
+        {chainesList && chainesList.length > 0 ? (
+          <Nav tabs>
+            {chainesList.map(chaine => (
+              <NavItem key={chaine.id}>
+                <NavLink
+                  className={classnames({ active: activeChaine?.id === chaine?.id })}
+                  onClick={() => {
+                    toggle(chaine);
+                  }}
+                >
+                  {chaine.chaineNom}
+                </NavLink>
+              </NavItem>
+            ))}
+          </Nav>
+        ) : (
+          !loadingChainesList && <div className="alert alert-warning">No Channel found</div>
+        )}
+        {activeChaine && (
+          <Card>
+            <CardHeader tag="h5" data-cy="cheminDetailsHeading">
+              {activeChaine.chaineNom}
+            </CardHeader>
+            <CardBody>
+              {activeLink && (
+                <>
+                  {activeLink.type === 'Embed' && activeLink.cheminMarche && (
+                    <div dangerouslySetInnerHTML={{ __html: activeLink.cheminNon }} />
+                  )}
+                  {activeLink.type !== 'Embed' && activeLink.cheminValide && <VideoPlayer src={activeLink.cheminNon} />}
+                </>
+              )}
+            </CardBody>
+          </Card>
+        )}
       </Col>
     </Row>
   );
 };
 
 const mapStateToProps = storeState => ({
+  categorieList: storeState.categorie.entities,
+  loadingCategorieList: storeState.categorie.loading,
+  chainesList: storeState.chaine.entities,
+  loadingChainesList: storeState.chaine.loading,
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated,
 });
 
-type StateProps = ReturnType<typeof mapStateToProps>;
+const mapDispatchToProps = {
+  getCategories,
+  getChanels,
+};
 
-export default connect(mapStateToProps)(Home);
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
