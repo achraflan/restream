@@ -7,7 +7,9 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardHeader, CardText, CardBody } from 'reactstrap';
+import { Nav, NavItem, NavLink, Card, CardHeader, CardBody } from 'reactstrap';
+import { Button, ButtonGroup, ButtonToolbar } from 'reactstrap';
+
 import VideoPlayer from '../../shared/util/videoPlayer';
 
 import { getEntities as getCategories } from '../../entities/categorie/categorie.reducer';
@@ -18,11 +20,13 @@ export interface IHomeProp extends StateProps, DispatchProps {}
 export const Home = (props: IHomeProp) => {
   const [activeChaine, setActiveChaine] = useState(null);
   const [activeLink, setActiveLink] = useState(null);
+  const [Links, setLinks] = useState(null);
 
   const getChaines = event => {
     /* eslint-disable no-console */
     console.log('we will use this to get channels.');
     setActiveChaine(null);
+    setLinks(null);
     props.getChanels();
   };
 
@@ -30,7 +34,10 @@ export const Home = (props: IHomeProp) => {
     if (activeChaine !== chaine) {
       setActiveLink(null);
       setActiveChaine(chaine);
-      if (chaine.chemins.length > 0) setActiveLink(chaine.chemins[0]);
+      if (chaine.chemins.length > 0) {
+        setLinks(chaine.chemins);
+        setActiveLink(chaine.chemins[0]);
+      }
     }
   };
 
@@ -93,6 +100,13 @@ export const Home = (props: IHomeProp) => {
                   )}
                   {activeLink.type !== 'Embed' && activeLink.cheminValide && <VideoPlayer src={activeLink.cheminNon} />}
                 </>
+              )}
+              {Links && Links.length > 0 && (
+                <ButtonGroup>
+                  {Links.map((link, i) => (
+                    <Button key={link.id}>{i + 1}</Button>
+                  ))}
+                </ButtonGroup>
               )}
             </CardBody>
           </Card>
