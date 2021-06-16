@@ -24,7 +24,7 @@ export const Home = (props: IHomeProp) => {
 
   const getChaines = event => {
     /* eslint-disable no-console */
-    console.log('we will use this to get channels.');
+    // console.log('we will use this to get channels.');
     setActiveChaine(null);
     setLinks(null);
     props.getChanels();
@@ -71,18 +71,21 @@ export const Home = (props: IHomeProp) => {
       <Col md="9">
         {chainesList && chainesList.length > 0 ? (
           <Nav tabs>
-            {chainesList.map(chaine => (
-              <NavItem key={chaine.id}>
-                <NavLink
-                  className={classnames({ active: activeChaine?.id === chaine?.id })}
-                  onClick={() => {
-                    toggle(chaine);
-                  }}
-                >
-                  {chaine.chaineNom}
-                </NavLink>
-              </NavItem>
-            ))}
+            {chainesList.map(
+              chaine =>
+                chaine.chaineActive && (
+                  <NavItem key={chaine.id}>
+                    <NavLink
+                      className={classnames({ active: activeChaine?.id === chaine?.id })}
+                      onClick={() => {
+                        toggle(chaine);
+                      }}
+                    >
+                      {chaine.chaineNom}
+                    </NavLink>
+                  </NavItem>
+                )
+            )}
           </Nav>
         ) : (
           !loadingChainesList && <div className="alert alert-warning">No Channel found</div>
@@ -103,9 +106,7 @@ export const Home = (props: IHomeProp) => {
               )}
               {Links && Links.length > 0 && (
                 <ButtonGroup>
-                  {Links.map((link, i) => (
-                    <Button key={link.id}>{i + 1}</Button>
-                  ))}
+                  {Links.map((link, i) => link.cheminValide && link.cheminMarche && <Button key={link.id}>{i + 1}</Button>)}
                 </ButtonGroup>
               )}
             </CardBody>
