@@ -11,7 +11,6 @@ import com.restream.api.repository.UserRepository;
 import com.restream.api.security.AuthoritiesConstants;
 import com.restream.api.service.EntityManager;
 import com.restream.api.service.dto.AdminUserDTO;
-import com.restream.api.service.dto.UserDTO;
 import com.restream.api.service.mapper.UserMapper;
 import com.restream.api.web.rest.vm.ManagedUserVM;
 import java.time.Instant;

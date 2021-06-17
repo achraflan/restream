@@ -12,7 +12,6 @@ import com.restream.api.security.AuthoritiesConstants;
 import com.restream.api.service.UserService;
 import com.restream.api.service.dto.AdminUserDTO;
 import com.restream.api.service.dto.PasswordChangeDTO;
-import com.restream.api.service.dto.UserDTO;
 import com.restream.api.web.rest.vm.KeyAndPasswordVM;
 import com.restream.api.web.rest.vm.ManagedUserVM;
 import java.time.Instant;

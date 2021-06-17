@@ -3,7 +3,6 @@ package com.restream.api.web.rest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.restream.api.IntegrationTest;
-import com.restream.api.config.Constants;
 import com.restream.api.domain.User;
 import com.restream.api.repository.UserRepository;
 import com.restream.api.security.AuthoritiesConstants;

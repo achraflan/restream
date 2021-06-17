@@ -6,7 +6,6 @@ import com.restream.api.service.MailService;
 import com.restream.api.service.UserService;
 import com.restream.api.service.dto.AdminUserDTO;
 import com.restream.api.service.dto.PasswordChangeDTO;
-import com.restream.api.service.dto.UserDTO;
 import com.restream.api.web.rest.errors.*;
 import com.restream.api.web.rest.vm.KeyAndPasswordVM;
 import com.restream.api.web.rest.vm.ManagedUserVM;
