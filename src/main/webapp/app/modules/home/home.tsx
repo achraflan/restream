@@ -43,6 +43,11 @@ export const Home = (props: IHomeProp) => {
     }
   };
 
+  const handleProblem = link => {
+    /* eslint-disable no-console */
+    console.log('signaler.');
+  };
+
   const toggle = chaine => {
     if (activeChaine !== chaine) {
       setActiveChaine(null);
@@ -139,6 +144,12 @@ export const Home = (props: IHomeProp) => {
                   )}
                   {activeLink.type !== 'Embed' && activeLink.cheminValide && <VideoPlayer src={activeLink.cheminNon} />}
                 </>
+              )}
+              <div className="empty" />
+              {activeLink && (
+                <Button color="link" onClick={() => handleProblem(activeLink)}>
+                  تبليغ
+                </Button>
               )}
             </CardBody>
           </Card>
