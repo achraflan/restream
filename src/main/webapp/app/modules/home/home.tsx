@@ -15,10 +15,14 @@ import Report from '../report/report';
 
 import { getEntities as getCategories } from '../../entities/categorie/categorie.reducer';
 import { getEntities as getChanels } from '../../entities/chaine/chaine.reducer';
+import { createEntity as createReport } from '../../entities/report/report.reducer';
+import { convertDateTimeToServer } from 'app/shared/util/date-utils';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
 
 export const Home = (props: IHomeProp) => {
+  const { categorieList, loadingCategorieList, account, chainesList, loadingChainesList } = props;
+
   const [activeChaine, setActiveChaine] = useState(null);
   const [activeLink, setActiveLink] = useState(null);
   const [Links, setLinks] = useState(null);
@@ -51,10 +55,12 @@ export const Home = (props: IHomeProp) => {
 
   const closeModal = () => setModal(!modal);
   const confirmReport = (event, values) => {
-    /* eslint-disable no-console */
-    console.log('event.', event);
-    /* eslint-disable no-console */
-    console.log('value.', values);
+    const entity = {
+      ...values,
+      cheminId: activeLink.id,
+      dateCreation: convertDateTimeToServer(new Date()),
+    };
+    props.createReport(entity);
     setModal(!modal);
   };
 
@@ -86,7 +92,6 @@ export const Home = (props: IHomeProp) => {
     return () => window.clearTimeout(timeoutID);
   }, []);
 
-  const { categorieList, loadingCategorieList, account, chainesList, loadingChainesList } = props;
   return (
     <>
       <Row>
@@ -178,12 +183,14 @@ const mapStateToProps = storeState => ({
   chainesList: storeState.chaine.entities,
   loadingChainesList: storeState.chaine.loading,
   account: storeState.authentication.account,
+  loadingReport: storeState.report.loading,
   isAuthenticated: storeState.authentication.isAuthenticated,
 });
 
 const mapDispatchToProps = {
   getCategories,
   getChanels,
+  createReport,
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
