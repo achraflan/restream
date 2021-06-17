@@ -21,6 +21,7 @@ export const Home = (props: IHomeProp) => {
   const [activeChaine, setActiveChaine] = useState(null);
   const [activeLink, setActiveLink] = useState(null);
   const [Links, setLinks] = useState(null);
+  const [timeoutID, setTimeoutID] = useState(null);
 
   const getChaines = event => {
     /* eslint-disable no-console */
@@ -30,14 +31,31 @@ export const Home = (props: IHomeProp) => {
     props.getChanels();
   };
 
+  const handleChaine = link => {
+    if (activeLink !== link) {
+      setActiveLink(null);
+      clearTimeout(timeoutID);
+      setTimeoutID(
+        setTimeout(() => {
+          setActiveLink(link);
+        }, 500)
+      );
+    }
+  };
+
   const toggle = chaine => {
     if (activeChaine !== chaine) {
-      setActiveLink(null);
-      setActiveChaine(chaine);
-      if (chaine.chemins.length > 0) {
-        setLinks(chaine.chemins);
-        setActiveLink(chaine.chemins[0]);
-      }
+      setActiveChaine(null);
+      clearTimeout(timeoutID);
+      setTimeoutID(
+        setTimeout(() => {
+          setActiveChaine(chaine);
+          if (chaine.chemins.length > 0) {
+            setLinks(chaine.chemins);
+            setActiveLink(chaine.chemins[0]);
+          }
+        }, 500)
+      );
     }
   };
 
@@ -47,6 +65,10 @@ export const Home = (props: IHomeProp) => {
 
   useEffect(() => {
     getAllEntities();
+  }, []);
+
+  useEffect(() => {
+    return () => window.clearTimeout(timeoutID);
   }, []);
 
   const { categorieList, loadingCategorieList, account, chainesList, loadingChainesList } = props;
@@ -96,6 +118,20 @@ export const Home = (props: IHomeProp) => {
               {activeChaine.chaineNom}
             </CardHeader>
             <CardBody>
+              {Links && Links.length > 0 && (
+                <ButtonGroup>
+                  {Links.map(
+                    (link, i) =>
+                      link.cheminValide &&
+                      link.cheminMarche && (
+                        <Button key={link.id} onClick={() => handleChaine(link)}>
+                          {i + 1}
+                        </Button>
+                      )
+                  )}
+                </ButtonGroup>
+              )}
+              <div className="empty" />
               {activeLink && (
                 <>
                   {activeLink.type === 'Embed' && activeLink.cheminMarche && (
@@ -103,11 +139,6 @@ export const Home = (props: IHomeProp) => {
                   )}
                   {activeLink.type !== 'Embed' && activeLink.cheminValide && <VideoPlayer src={activeLink.cheminNon} />}
                 </>
-              )}
-              {Links && Links.length > 0 && (
-                <ButtonGroup>
-                  {Links.map((link, i) => link.cheminValide && link.cheminMarche && <Button key={link.id}>{i + 1}</Button>)}
-                </ButtonGroup>
               )}
             </CardBody>
           </Card>
