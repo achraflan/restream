@@ -12,7 +12,6 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IChaine, defaultValue } from 'app/shared/model/chaine.model';
-import { IChemin } from 'app/shared/model/chemin.model';
 
 export const ACTION_TYPES = {
   FETCH_CHAINE_LIST: 'chaine/FETCH_CHAINE_LIST',

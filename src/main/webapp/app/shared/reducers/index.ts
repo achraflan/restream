@@ -27,6 +27,10 @@ import tag, {
 import chemin, {
   CheminState
 } from 'app/entities/chemin/chemin.reducer';
+// prettier-ignore
+import report, {
+  ReportState
+} from 'app/entities/report/report.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -43,6 +47,7 @@ export interface IRootState {
   readonly categorie: CategorieState;
   readonly tag: TagState;
   readonly chemin: CheminState;
+  readonly report: ReportState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -61,6 +66,7 @@ const rootReducer = combineReducers<IRootState>({
   categorie,
   tag,
   chemin,
+  report,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

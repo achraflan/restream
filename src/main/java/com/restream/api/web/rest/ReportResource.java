@@ -1,8 +1,8 @@
 package com.restream.api.web.rest;
 
-import com.restream.api.domain.Chaine;
-import com.restream.api.repository.ChaineRepository;
-import com.restream.api.service.ChaineService;
+import com.restream.api.domain.Report;
+import com.restream.api.repository.ReportRepository;
+import com.restream.api.service.ReportService;
 import com.restream.api.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,48 +33,48 @@ import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.reactive.ResponseUtil;
 
 /**
- * REST controller for managing {@link com.restream.api.domain.Chaine}.
+ * REST controller for managing {@link com.restream.api.domain.Report}.
  */
 @RestController
 @RequestMapping("/api")
-public class ChaineResource {
+public class ReportResource {
 
-    private final Logger log = LoggerFactory.getLogger(ChaineResource.class);
+    private final Logger log = LoggerFactory.getLogger(ReportResource.class);
 
-    private static final String ENTITY_NAME = "chaine";
+    private static final String ENTITY_NAME = "report";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final ChaineService chaineService;
+    private final ReportService reportService;
 
-    private final ChaineRepository chaineRepository;
+    private final ReportRepository reportRepository;
 
-    public ChaineResource(ChaineService chaineService, ChaineRepository chaineRepository) {
-        this.chaineService = chaineService;
-        this.chaineRepository = chaineRepository;
+    public ReportResource(ReportService reportService, ReportRepository reportRepository) {
+        this.reportService = reportService;
+        this.reportRepository = reportRepository;
     }
 
     /**
-     * {@code POST  /chaines} : Create a new chaine.
+     * {@code POST  /reports} : Create a new report.
      *
-     * @param chaine the chaine to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new chaine, or with status {@code 400 (Bad Request)} if the chaine has already an ID.
+     * @param report the report to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new report, or with status {@code 400 (Bad Request)} if the report has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/chaines")
-    public Mono<ResponseEntity<Chaine>> createChaine(@RequestBody Chaine chaine) throws URISyntaxException {
-        log.debug("REST request to save Chaine : {}", chaine);
-        if (chaine.getId() != null) {
-            throw new BadRequestAlertException("A new chaine cannot already have an ID", ENTITY_NAME, "idexists");
+    @PostMapping("/reports")
+    public Mono<ResponseEntity<Report>> createReport(@Valid @RequestBody Report report) throws URISyntaxException {
+        log.debug("REST request to save Report : {}", report);
+        if (report.getId() != null) {
+            throw new BadRequestAlertException("A new report cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        return chaineService
-            .save(chaine)
+        return reportService
+            .save(report)
             .map(
                 result -> {
                     try {
                         return ResponseEntity
-                            .created(new URI("/api/chaines/" + result.getId()))
+                            .created(new URI("/api/reports/" + result.getId()))
                             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
                             .body(result);
                     } catch (URISyntaxException e) {
@@ -83,29 +85,29 @@ public class ChaineResource {
     }
 
     /**
-     * {@code PUT  /chaines/:id} : Updates an existing chaine.
+     * {@code PUT  /reports/:id} : Updates an existing report.
      *
-     * @param id the id of the chaine to save.
-     * @param chaine the chaine to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chaine,
-     * or with status {@code 400 (Bad Request)} if the chaine is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the chaine couldn't be updated.
+     * @param id the id of the report to save.
+     * @param report the report to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated report,
+     * or with status {@code 400 (Bad Request)} if the report is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the report couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/chaines/{id}")
-    public Mono<ResponseEntity<Chaine>> updateChaine(
+    @PutMapping("/reports/{id}")
+    public Mono<ResponseEntity<Report>> updateReport(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Chaine chaine
+        @Valid @RequestBody Report report
     ) throws URISyntaxException {
-        log.debug("REST request to update Chaine : {}, {}", id, chaine);
-        if (chaine.getId() == null) {
+        log.debug("REST request to update Report : {}, {}", id, report);
+        if (report.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, chaine.getId())) {
+        if (!Objects.equals(id, report.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        return chaineRepository
+        return reportRepository
             .existsById(id)
             .flatMap(
                 exists -> {
@@ -113,8 +115,8 @@ public class ChaineResource {
                         return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
                     }
 
-                    return chaineService
-                        .save(chaine)
+                    return reportService
+                        .save(report)
                         .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
                         .map(
                             result ->
@@ -130,30 +132,30 @@ public class ChaineResource {
     }
 
     /**
-     * {@code PATCH  /chaines/:id} : Partial updates given fields of an existing chaine, field will ignore if it is null
+     * {@code PATCH  /reports/:id} : Partial updates given fields of an existing report, field will ignore if it is null
      *
-     * @param id the id of the chaine to save.
-     * @param chaine the chaine to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chaine,
-     * or with status {@code 400 (Bad Request)} if the chaine is not valid,
-     * or with status {@code 404 (Not Found)} if the chaine is not found,
-     * or with status {@code 500 (Internal Server Error)} if the chaine couldn't be updated.
+     * @param id the id of the report to save.
+     * @param report the report to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated report,
+     * or with status {@code 400 (Bad Request)} if the report is not valid,
+     * or with status {@code 404 (Not Found)} if the report is not found,
+     * or with status {@code 500 (Internal Server Error)} if the report couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/chaines/{id}", consumes = "application/merge-patch+json")
-    public Mono<ResponseEntity<Chaine>> partialUpdateChaine(
+    @PatchMapping(value = "/reports/{id}", consumes = "application/merge-patch+json")
+    public Mono<ResponseEntity<Report>> partialUpdateReport(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Chaine chaine
+        @NotNull @RequestBody Report report
     ) throws URISyntaxException {
-        log.debug("REST request to partial update Chaine partially : {}, {}", id, chaine);
-        if (chaine.getId() == null) {
+        log.debug("REST request to partial update Report partially : {}, {}", id, report);
+        if (report.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, chaine.getId())) {
+        if (!Objects.equals(id, report.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        return chaineRepository
+        return reportRepository
             .existsById(id)
             .flatMap(
                 exists -> {
@@ -161,7 +163,7 @@ public class ChaineResource {
                         return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
                     }
 
-                    Mono<Chaine> result = chaineService.partialUpdate(chaine);
+                    Mono<Report> result = reportService.partialUpdate(report);
 
                     return result
                         .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
@@ -179,23 +181,18 @@ public class ChaineResource {
     }
 
     /**
-     * {@code GET  /chaines} : get all the chaines.
+     * {@code GET  /reports} : get all the reports.
      *
      * @param pageable the pagination information.
      * @param request a {@link ServerHttpRequest} request.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of chaines in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of reports in body.
      */
-    @GetMapping("/chaines")
-    public Mono<ResponseEntity<List<Chaine>>> getAllChaines(
-        Pageable pageable,
-        ServerHttpRequest request,
-        @RequestParam(required = false, defaultValue = "false") boolean eagerload
-    ) {
-        log.debug("REST request to get a page of Chaines");
-        return chaineService
+    @GetMapping("/reports")
+    public Mono<ResponseEntity<List<Report>>> getAllReports(Pageable pageable, ServerHttpRequest request) {
+        log.debug("REST request to get a page of Reports");
+        return reportService
             .countAll()
-            .zipWith(chaineService.findAll(pageable).collectList())
+            .zipWith(reportService.findAll(pageable).collectList())
             .map(
                 countWithEntities -> {
                     return ResponseEntity
@@ -212,29 +209,29 @@ public class ChaineResource {
     }
 
     /**
-     * {@code GET  /chaines/:id} : get the "id" chaine.
+     * {@code GET  /reports/:id} : get the "id" report.
      *
-     * @param id the id of the chaine to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the chaine, or with status {@code 404 (Not Found)}.
+     * @param id the id of the report to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the report, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/chaines/{id}")
-    public Mono<ResponseEntity<Chaine>> getChaine(@PathVariable Long id) {
-        log.debug("REST request to get Chaine : {}", id);
-        Mono<Chaine> chaine = chaineService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(chaine);
+    @GetMapping("/reports/{id}")
+    public Mono<ResponseEntity<Report>> getReport(@PathVariable Long id) {
+        log.debug("REST request to get Report : {}", id);
+        Mono<Report> report = reportService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(report);
     }
 
     /**
-     * {@code DELETE  /chaines/:id} : delete the "id" chaine.
+     * {@code DELETE  /reports/:id} : delete the "id" report.
      *
-     * @param id the id of the chaine to delete.
+     * @param id the id of the report to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/chaines/{id}")
+    @DeleteMapping("/reports/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public Mono<ResponseEntity<Void>> deleteChaine(@PathVariable Long id) {
-        log.debug("REST request to delete Chaine : {}", id);
-        return chaineService
+    public Mono<ResponseEntity<Void>> deleteReport(@PathVariable Long id) {
+        log.debug("REST request to delete Report : {}", id);
+        return reportService
             .delete(id)
             .map(
                 result ->

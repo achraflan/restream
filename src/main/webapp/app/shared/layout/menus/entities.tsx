@@ -21,6 +21,11 @@ export const EntitiesMenu = props => (
         Tag
       </MenuItem>
     )}
+    {props.isAuthenticated && props.isAdmin && (
+      <MenuItem icon="asterisk" to="/report">
+        Report
+      </MenuItem>
+    )}
     {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}
   </NavDropdown>
 );

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Card, CardImg, CardText, CardBody, CardSubtitle, Button, CardHeader } from 'reactstrap';
+import { Card, CardText, CardBody, CardSubtitle, Button, CardHeader } from 'reactstrap';
 
 import {} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
