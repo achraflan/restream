@@ -10,7 +10,7 @@ const Copyright = () => {
         لسنا مسؤولين عن أي خرق للقوانين
       </h5>
       <h5 className="text-center ">
-        Disclaimer: This content is provided and hosted by Another Website We are not responsible for and cannot be accountable for any of
+        Disclaimer: When content is provided and hosted by Another Website We are not responsible for and cannot be accountable for any of
         the content hosted on the third-party site For any legal complaints please contact the video/audio hosting provider
       </h5>
     </Alert>
