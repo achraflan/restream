@@ -1,7 +1,7 @@
 import './contactus.scss';
 import React from 'react';
 import { Alert } from 'reactstrap';
-import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Row, Button, FormGroup } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 const ContactUs = () => {
