@@ -8,8 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntity } from './chemin.reducer';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
-
 import VideoPlayer from '../../shared/util/videoPlayer';
 
 export interface ICheminDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}

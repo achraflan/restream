@@ -2,18 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Label, Card, CardHeader, CardBody } from 'reactstrap';
-import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
-import { translate } from 'react-jhipster';
+import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { ICategorie } from 'app/shared/model/categorie.model';
 import { getEntities as getCategories } from 'app/entities/categorie/categorie.reducer';
-import { ITag } from 'app/shared/model/tag.model';
 import { getEntities as getTags } from 'app/entities/tag/tag.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './chaine.reducer';
-import { IChaine } from 'app/shared/model/chaine.model';
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
 export interface IChaineUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}

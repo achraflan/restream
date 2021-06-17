@@ -10,7 +10,6 @@ import {
   JvmThreads,
   EndpointsRequestsMetrics,
   SystemMetrics,
-  Translate,
 } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

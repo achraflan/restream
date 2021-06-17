@@ -1,7 +1,6 @@
 import './home.scss';
 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { connect } from 'react-redux';

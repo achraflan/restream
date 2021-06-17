@@ -5,7 +5,6 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Row, Col, Alert, Button } from 'reactstrap';
 
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
-import { IRootState } from 'app/shared/reducers';
 import { handleRegister, reset } from './register.reducer';
 
 export type IRegisterProps = DispatchProps;

@@ -2,17 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Label, Card, CardHeader, CardBody } from 'reactstrap';
-import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
-import { translate } from 'react-jhipster';
+import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { IChaine } from 'app/shared/model/chaine.model';
 import { getEntities as getChaines } from 'app/entities/chaine/chaine.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './chemin.reducer';
-import { IChemin } from 'app/shared/model/chemin.model';
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 
 export interface ICheminUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
