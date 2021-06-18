@@ -53,7 +53,7 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev
-    url: jdbc:h2:file:./target/h2db/db/restream;DB_CLOSE_DELAY=-1
+    url: jdbc:mysql://194.163.132.111:3306/restream?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
   mail:
     host: localhost
     port: 25
