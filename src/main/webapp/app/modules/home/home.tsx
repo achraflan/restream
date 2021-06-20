@@ -65,6 +65,7 @@ export const Home = (props: IHomeProp) => {
 
   const toggle = chaine => {
     if (activeChaine !== chaine) {
+      setActiveLink(null);
       setActiveChaine(null);
       clearTimeout(timeoutID);
       setTimeoutID(
