@@ -27,8 +27,10 @@ export const Home = (props: IHomeProp) => {
   const [Links, setLinks] = useState(null);
   const [timeoutID, setTimeoutID] = useState(null);
   const [modal, setModal] = useState(false);
+  const [activeCategorie, setaAtiveCategorie] = useState(null);
 
-  const getChaines = event => {
+  const getChaines = categorie => {
+    setaAtiveCategorie(categorie);
     /* eslint-disable no-console */
     // console.log('we will use this to get channels.');
     setActiveChaine(null);
@@ -102,7 +104,7 @@ export const Home = (props: IHomeProp) => {
                 Categorie
               </ListGroupItem>
               {categorieList.map(categorie => (
-                <ListGroupItem key={categorie.id} className="justify-content-between" onClick={getChaines}>
+                <ListGroupItem key={categorie.id} className="justify-content-between" onClick={() => getChaines(categorie)}>
                   {categorie.categorieNom}{' '}
                 </ListGroupItem>
               ))}
@@ -116,7 +118,8 @@ export const Home = (props: IHomeProp) => {
             <Nav tabs>
               {chainesList.map(
                 chaine =>
-                  chaine.chaineActive && (
+                  chaine.chaineActive &&
+                  chaine.categorieId === activeCategorie.id && (
                     <NavItem key={chaine.id}>
                       <NavLink
                         className={classnames({ active: activeChaine?.id === chaine?.id })}
