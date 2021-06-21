@@ -58,8 +58,10 @@ spring:
   mail:
     host: tabi3.live
     port: 25
+    protocol: smtp
     username:
     password:
+    from: admin@tabi3.live
   r2dbc:
     url: r2dbc:mysql://194.163.132.111:3306/restream?useUnicode=true&characterEncoding=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: achraf
@@ -128,6 +130,7 @@ jhipster:
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
+    from: admin@tabi3.live
     base-url: tabi3.live # Modify according to your server's URL
   logging:
     use-json-format: false # By default, logs are not in Json format
