@@ -118,7 +118,7 @@ export const Home = (props: IHomeProp) => {
             <Nav tabs>
               {chainesList.map(
                 chaine =>
-                  chaine.chaineActive &&
+                  chaine.chaineActive && activeCategorie &&
                   chaine.categorieId === activeCategorie.id && (
                     <NavItem key={chaine.id}>
                       <NavLink

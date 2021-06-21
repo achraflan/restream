@@ -53,16 +53,24 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev
-    url: jdbc:mysql://194.163.132.111:3306/restream?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://194.163.132.111:3306/restream?useUnicode=true&characterEncoding=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
   mail:
-    host: localhost
+    host: tabi3.live
     port: 25
-    username:
-    password:
+    username: 
+    password: 
+    protocol: smtp
+    debug: true
+    tls: false
+    properties.mail.smtp:
+      auth: false
+      starttls.enable: false
+      timeout: 3000
+
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   r2dbc:
-    url: r2dbc:mysql://194.163.132.111:3306/restream?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: r2dbc:mysql://194.163.132.111:3306/restream?useUnicode=true&characterEncoding=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: achraf
     password: Achraf_1161805
   thymeleaf:
@@ -107,7 +115,8 @@ jhipster:
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://127.0.0.1:8080
+    base-url: tabi3.live
+    from: admin@tabi3.live
   logging:
     use-json-format: false # By default, logs are not in Json format
     logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
