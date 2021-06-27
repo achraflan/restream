@@ -99,6 +99,7 @@ public class SecurityConfiguration {
             .pathMatchers(HttpMethod.GET ,"/api/chaines").permitAll()
             .pathMatchers(HttpMethod.GET ,"/api/categories").permitAll()
             .pathMatchers(HttpMethod.POST ,"/api/reports").permitAll()
+            .pathMatchers(HttpMethod.POST ,"/api/send-mail").permitAll()
             .pathMatchers("/api/account/reset-password/init").permitAll()
             .pathMatchers("/api/account/reset-password/finish").permitAll()
             .pathMatchers("/api/auth-info").permitAll()

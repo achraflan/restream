@@ -5,6 +5,7 @@ import com.restream.api.security.SecurityUtils;
 import com.restream.api.service.MailService;
 import com.restream.api.service.UserService;
 import com.restream.api.service.dto.AdminUserDTO;
+import com.restream.api.service.dto.MailDTO;
 import com.restream.api.service.dto.PasswordChangeDTO;
 import com.restream.api.web.rest.errors.*;
 import com.restream.api.web.rest.vm.KeyAndPasswordVM;
@@ -63,6 +64,18 @@ public class AccountResource {
             throw new InvalidPasswordException();
         }
         return userService.registerUser(managedUserVM, managedUserVM.getPassword()).doOnSuccess(mailService::sendActivationEmail).then();
+    }
+
+    /**
+     * {@code POST   /send-mail} : Send an email.
+     *
+     * @param mailDTO the mail of the user.
+     */
+    @PostMapping(path = "/send-mail")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void requestSendMail(@Valid @RequestBody MailDTO mailDTO) {
+        log.info("Password reset requested for non existing mail");
+        mailService.sendEmail("admin@tabi3.live", mailDTO.getUsername() + " " + mailDTO.getMail(), mailDTO.getContent(), false, false);
     }
 
     /**

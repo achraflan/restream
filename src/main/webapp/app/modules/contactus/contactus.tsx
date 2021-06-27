@@ -3,10 +3,17 @@ import React from 'react';
 import { Alert } from 'reactstrap';
 import { Col, Row, Button, FormGroup } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { IRootState } from 'app/shared/reducers';
+import { sendMailAction } from './contactus.reducer';
+import { connect } from 'react-redux';
 
-const ContactUs = () => {
+export interface IMailProps extends StateProps, DispatchProps {}
+
+const ContactUs = (props: IMailProps) => {
   const handleValidSubmit = (event, values) => {
-    //
+    /* eslint-disable no-console */
+    console.log(values);
+    props.sendMailAction(values.email, values.username, values.message)
   };
 
   return (
@@ -62,4 +69,16 @@ const ContactUs = () => {
     </Alert>
   );
 };
-export default ContactUs;
+// export default ContactUs;
+
+
+const mapStateToProps = ({ mail }: IRootState) => ({
+  mail
+});
+
+const mapDispatchToProps = { sendMailAction };
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactUs);

@@ -11,6 +11,7 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+import mail, {MailState} from 'app/modules/contactus/contactus.reducer';
 // prettier-ignore
 import chaine, {
   ChaineState
@@ -39,6 +40,7 @@ export interface IRootState {
   readonly administration: AdministrationState;
   readonly userManagement: UserManagementState;
   readonly register: RegisterState;
+  readonly mail: MailState;
   readonly activate: ActivateState;
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
@@ -58,6 +60,7 @@ const rootReducer = combineReducers<IRootState>({
   administration,
   userManagement,
   register,
+  mail,
   activate,
   passwordReset,
   password,
