@@ -1,4 +1,5 @@
 import React from 'react';
+import './iframePlayer.scss';
 
 interface IframePlayerProps {
   src: string;
@@ -6,14 +7,15 @@ interface IframePlayerProps {
 
 export default function IframePlayer({ src }: IframePlayerProps) {
   return (
-    <iframe
-      width="560"
-      height="315"
-      src={src}
-      title="Restream Player"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    ></iframe>
+    <div className="container-iframe">
+      <iframe
+        className="responsive-iframe"
+        src={src}
+        title="Restream Player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
   );
 }
