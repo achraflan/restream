@@ -17,9 +17,6 @@
             <column name="chemin_non" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="chemin_description" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
