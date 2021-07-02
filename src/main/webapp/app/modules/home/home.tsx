@@ -118,7 +118,8 @@ export const Home = (props: IHomeProp) => {
             <Nav tabs>
               {chainesList.map(
                 chaine =>
-                  chaine.chaineActive && activeCategorie &&
+                  chaine.chaineActive &&
+                  activeCategorie &&
                   chaine.categorieId === activeCategorie.id && (
                     <NavItem key={chaine.id}>
                       <NavLink
@@ -149,7 +150,7 @@ export const Home = (props: IHomeProp) => {
                         link.cheminValide &&
                         link.cheminMarche && (
                           <Button key={link.id} onClick={() => handleChaine(link)}>
-                            {i + 1}
+                            {link.cheminDescription}
                           </Button>
                         )
                     )}
