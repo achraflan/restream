@@ -52,6 +52,9 @@ public class CheminServiceImpl implements CheminService {
                     if (chemin.getCheminMarche() != null) {
                         existingChemin.setCheminMarche(chemin.getCheminMarche());
                     }
+                    if (chemin.getCheminDescription() != null) {
+                        existingChemin.setCheminDescription(chemin.getCheminDescription());
+                    }
 
                     return existingChemin;
                 }

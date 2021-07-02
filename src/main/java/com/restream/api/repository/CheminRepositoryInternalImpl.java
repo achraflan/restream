@@ -152,6 +152,7 @@ class CheminSqlHelper {
         columns.add(Column.aliased("type", table, columnPrefix + "_type"));
         columns.add(Column.aliased("chemin_valide", table, columnPrefix + "_chemin_valide"));
         columns.add(Column.aliased("chemin_marche", table, columnPrefix + "_chemin_marche"));
+        columns.add(Column.aliased("chemin_description", table, columnPrefix + "_chemin_description"));
 
         columns.add(Column.aliased("chaine_id", table, columnPrefix + "_chaine_id"));
         return columns;

@@ -41,6 +41,9 @@ class CheminResourceIT {
     private static final Boolean DEFAULT_CHEMIN_MARCHE = false;
     private static final Boolean UPDATED_CHEMIN_MARCHE = true;
 
+    private static final String DEFAULT_CHEMIN_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_CHEMIN_DESCRIPTION = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/chemins";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -69,7 +72,8 @@ class CheminResourceIT {
             .cheminNon(DEFAULT_CHEMIN_NON)
             .type(DEFAULT_TYPE)
             .cheminValide(DEFAULT_CHEMIN_VALIDE)
-            .cheminMarche(DEFAULT_CHEMIN_MARCHE);
+            .cheminMarche(DEFAULT_CHEMIN_MARCHE)
+            .cheminDescription(DEFAULT_CHEMIN_DESCRIPTION);
         return chemin;
     }
 
@@ -84,7 +88,8 @@ class CheminResourceIT {
             .cheminNon(UPDATED_CHEMIN_NON)
             .type(UPDATED_TYPE)
             .cheminValide(UPDATED_CHEMIN_VALIDE)
-            .cheminMarche(UPDATED_CHEMIN_MARCHE);
+            .cheminMarche(UPDATED_CHEMIN_MARCHE)
+            .cheminDescription(UPDATED_CHEMIN_DESCRIPTION);
         return chemin;
     }
 
@@ -128,6 +133,7 @@ class CheminResourceIT {
         assertThat(testChemin.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testChemin.getCheminValide()).isEqualTo(DEFAULT_CHEMIN_VALIDE);
         assertThat(testChemin.getCheminMarche()).isEqualTo(DEFAULT_CHEMIN_MARCHE);
+        assertThat(testChemin.getCheminDescription()).isEqualTo(DEFAULT_CHEMIN_DESCRIPTION);
     }
 
     @Test
@@ -177,7 +183,9 @@ class CheminResourceIT {
             .jsonPath("$.[*].cheminValide")
             .value(hasItem(DEFAULT_CHEMIN_VALIDE.booleanValue()))
             .jsonPath("$.[*].cheminMarche")
-            .value(hasItem(DEFAULT_CHEMIN_MARCHE.booleanValue()));
+            .value(hasItem(DEFAULT_CHEMIN_MARCHE.booleanValue()))
+            .jsonPath("$.[*].cheminDescription")
+            .value(hasItem(DEFAULT_CHEMIN_DESCRIPTION));
     }
 
     @Test
@@ -205,7 +213,9 @@ class CheminResourceIT {
             .jsonPath("$.cheminValide")
             .value(is(DEFAULT_CHEMIN_VALIDE.booleanValue()))
             .jsonPath("$.cheminMarche")
-            .value(is(DEFAULT_CHEMIN_MARCHE.booleanValue()));
+            .value(is(DEFAULT_CHEMIN_MARCHE.booleanValue()))
+            .jsonPath("$.cheminDescription")
+            .value(is(DEFAULT_CHEMIN_DESCRIPTION));
     }
 
     @Test
@@ -233,7 +243,8 @@ class CheminResourceIT {
             .cheminNon(UPDATED_CHEMIN_NON)
             .type(UPDATED_TYPE)
             .cheminValide(UPDATED_CHEMIN_VALIDE)
-            .cheminMarche(UPDATED_CHEMIN_MARCHE);
+            .cheminMarche(UPDATED_CHEMIN_MARCHE)
+            .cheminDescription(UPDATED_CHEMIN_DESCRIPTION);
 
         webTestClient
             .put()
@@ -252,6 +263,7 @@ class CheminResourceIT {
         assertThat(testChemin.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testChemin.getCheminValide()).isEqualTo(UPDATED_CHEMIN_VALIDE);
         assertThat(testChemin.getCheminMarche()).isEqualTo(UPDATED_CHEMIN_MARCHE);
+        assertThat(testChemin.getCheminDescription()).isEqualTo(UPDATED_CHEMIN_DESCRIPTION);
     }
 
     @Test
@@ -344,6 +356,7 @@ class CheminResourceIT {
         assertThat(testChemin.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testChemin.getCheminValide()).isEqualTo(UPDATED_CHEMIN_VALIDE);
         assertThat(testChemin.getCheminMarche()).isEqualTo(DEFAULT_CHEMIN_MARCHE);
+        assertThat(testChemin.getCheminDescription()).isEqualTo(DEFAULT_CHEMIN_DESCRIPTION);
     }
 
     @Test
@@ -361,7 +374,8 @@ class CheminResourceIT {
             .cheminNon(UPDATED_CHEMIN_NON)
             .type(UPDATED_TYPE)
             .cheminValide(UPDATED_CHEMIN_VALIDE)
-            .cheminMarche(UPDATED_CHEMIN_MARCHE);
+            .cheminMarche(UPDATED_CHEMIN_MARCHE)
+            .cheminDescription(UPDATED_CHEMIN_DESCRIPTION);
 
         webTestClient
             .patch()
@@ -380,6 +394,7 @@ class CheminResourceIT {
         assertThat(testChemin.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testChemin.getCheminValide()).isEqualTo(UPDATED_CHEMIN_VALIDE);
         assertThat(testChemin.getCheminMarche()).isEqualTo(UPDATED_CHEMIN_MARCHE);
+        assertThat(testChemin.getCheminDescription()).isEqualTo(UPDATED_CHEMIN_DESCRIPTION);
     }
 
     @Test

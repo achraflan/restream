@@ -17,6 +17,10 @@
     {
       "fieldName": "cheminMarche",
       "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "cheminDescription",
+      "fieldType": "String"
     }
   ],
   "relationships": [

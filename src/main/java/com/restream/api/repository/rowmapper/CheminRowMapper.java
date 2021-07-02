@@ -31,6 +31,7 @@ public class CheminRowMapper implements BiFunction<Row, String, Chemin> {
         entity.setType(converter.fromRow(row, prefix + "_type", TypeChemin.class));
         entity.setCheminValide(converter.fromRow(row, prefix + "_chemin_valide", Boolean.class));
         entity.setCheminMarche(converter.fromRow(row, prefix + "_chemin_marche", Boolean.class));
+        entity.setCheminDescription(converter.fromRow(row, prefix + "_chemin_description", String.class));
         entity.setChaineId(converter.fromRow(row, prefix + "_chaine_id", Long.class));
         return entity;
     }

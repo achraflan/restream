@@ -70,9 +70,15 @@ export const CheminUpdate = (props: ICheminUpdateProps) => {
               ) : null}
               <AvGroup>
                 <Label id="cheminNonLabel" for="chemin-cheminNon">
-                  Chemin Non
+                  Chemin Nom
                 </Label>
                 <AvField id="chemin-cheminNon" data-cy="cheminNon" type="text" name="cheminNon" />
+              </AvGroup>
+              <AvGroup>
+                <Label id="cheminDescriptionLabel" for="chemin-cheminDescription">
+                  Chemin Description
+                </Label>
+                <AvField id="chemin-cheminDescription" data-cy="cheminDescription" type="text" name="cheminDescription" />
               </AvGroup>
               <AvGroup>
                 <Label id="typeLabel" for="chemin-type">

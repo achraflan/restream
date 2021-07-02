@@ -7,6 +7,7 @@ export interface IChemin {
   type?: TypeChemin | null;
   cheminValide?: boolean | null;
   cheminMarche?: boolean | null;
+  cheminDescription?: string | null;
   chaine?: IChaine | null;
 }
 

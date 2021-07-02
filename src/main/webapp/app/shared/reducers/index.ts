@@ -11,7 +11,7 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
-import mail, {MailState} from 'app/modules/contactus/contactus.reducer';
+import mail, { MailState } from 'app/modules/contactus/contactus.reducer';
 // prettier-ignore
 import chaine, {
   ChaineState

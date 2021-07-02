@@ -111,6 +111,9 @@ export const Chemin = (props: ICheminProps) => {
                   <th>
                     Chaine <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th className="hand" onClick={sort('cheminDescription')}>
+                    Chemin Description <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th className="hand" onClick={sort('type')}>
                     Type <FontAwesomeIcon icon="sort" />
                   </th>
@@ -132,6 +135,7 @@ export const Chemin = (props: ICheminProps) => {
                       </Button>
                     </td>
                     <td>{chemin.chaine ? <Link to={`chaine/${chemin.chaine.id}`}>{chemin.chaine.chaineNom}</Link> : ''}</td>
+                    <td>{chemin.cheminDescription}</td>
                     <td>{chemin.type}</td>
                     <td>{chemin.cheminValide ? 'true' : 'false'}</td>
                     <td>{chemin.cheminMarche ? 'true' : 'false'}</td>

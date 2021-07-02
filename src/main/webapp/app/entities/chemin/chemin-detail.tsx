@@ -31,6 +31,9 @@ export const CheminDetail = (props: ICheminDetailProps) => {
         <CardSubtitle tag="h6" id="cheminMarche" className="mb-2 text-muted">
           Running: {cheminEntity.cheminMarche ? 'true' : 'false'}
         </CardSubtitle>
+        <CardText id="cheminDescription">
+          <span>Chemin Description : </span> {cheminEntity.cheminDescription}
+        </CardText>
         <CardText id="chaineNom">Chaine : {cheminEntity.chaine ? cheminEntity.chaine.chaineNom : ''}.</CardText>
         {cheminEntity.type === 'Embed' && cheminEntity.cheminMarche && <div dangerouslySetInnerHTML={{ __html: cheminEntity.cheminNon }} />}
         {cheminEntity.type !== 'Embed' && cheminEntity.cheminValide && <VideoPlayer src={cheminEntity.cheminNon} />}

@@ -32,6 +32,9 @@ public class Chemin implements Serializable {
     @Column("chemin_marche")
     private Boolean cheminMarche;
 
+    @Column("chemin_description")
+    private String cheminDescription;
+
     /**
      * Another side of the same relationship
      */
@@ -109,6 +112,19 @@ public class Chemin implements Serializable {
         this.cheminMarche = cheminMarche;
     }
 
+    public String getCheminDescription() {
+        return this.cheminDescription;
+    }
+
+    public Chemin cheminDescription(String cheminDescription) {
+        this.cheminDescription = cheminDescription;
+        return this;
+    }
+
+    public void setCheminDescription(String cheminDescription) {
+        this.cheminDescription = cheminDescription;
+    }
+
     public Chaine getChaine() {
         return this.chaine;
     }
@@ -160,6 +176,7 @@ public class Chemin implements Serializable {
             ", type='" + getType() + "'" +
             ", cheminValide='" + getCheminValide() + "'" +
             ", cheminMarche='" + getCheminMarche() + "'" +
+            ", cheminDescription='" + getCheminDescription() + "'" +
             "}";
     }
 }
