@@ -10,6 +10,7 @@ import { Nav, NavItem, NavLink, Card, CardHeader, CardBody } from 'reactstrap';
 import { Button, ButtonGroup, ButtonToolbar } from 'reactstrap';
 
 import VideoPlayer from '../../shared/util/videoPlayer';
+import IframePlayer from '../../shared/util/iframePlayer';
 import Report from '../report/report';
 
 import { getEntities as getCategories } from '../../entities/categorie/categorie.reducer';
@@ -159,9 +160,7 @@ export const Home = (props: IHomeProp) => {
                 <div className="empty" />
                 {activeLink && (
                   <>
-                    {activeLink.type === 'Embed' && activeLink.cheminMarche && (
-                      <div dangerouslySetInnerHTML={{ __html: activeLink.cheminNon }} />
-                    )}
+                    {activeLink.type === 'Embed' && activeLink.cheminMarche && <IframePlayer src={activeLink.cheminNon} />}
                     {activeLink.type !== 'Embed' && activeLink.cheminValide && <VideoPlayer src={activeLink.cheminNon} />}
                   </>
                 )}

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 import { getEntity } from './chemin.reducer';
 import VideoPlayer from '../../shared/util/videoPlayer';
-
+import IframePlayer from '../../shared/util/iframePlayer';
 export interface ICheminDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const CheminDetail = (props: ICheminDetailProps) => {
@@ -35,7 +35,7 @@ export const CheminDetail = (props: ICheminDetailProps) => {
           <span>Chemin Description : </span> {cheminEntity.cheminDescription}
         </CardText>
         <CardText id="chaineNom">Chaine : {cheminEntity.chaine ? cheminEntity.chaine.chaineNom : ''}.</CardText>
-        {cheminEntity.type === 'Embed' && cheminEntity.cheminMarche && <div dangerouslySetInnerHTML={{ __html: cheminEntity.cheminNon }} />}
+        {cheminEntity.type === 'Embed' && cheminEntity.cheminMarche && <IframePlayer src={cheminEntity.cheminNon} />}
         {cheminEntity.type !== 'Embed' && cheminEntity.cheminValide && <VideoPlayer src={cheminEntity.cheminNon} />}
         <CardText></CardText>
         <Button tag={Link} to="/chemin" replace color="info" data-cy="entityDetailsBackButton">
