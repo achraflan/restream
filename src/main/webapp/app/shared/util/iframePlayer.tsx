@@ -13,8 +13,8 @@ export default function IframePlayer({ src }: IframePlayerProps) {
         src={src}
         title="Restream Player"
         frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
         allowFullScreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen *"
       ></iframe>
     </div>
   );

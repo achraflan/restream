@@ -11,9 +11,7 @@ export interface IMailProps extends StateProps, DispatchProps {}
 
 const ContactUs = (props: IMailProps) => {
   const handleValidSubmit = (event, values) => {
-    /* eslint-disable no-console */
-    console.log(values);
-    props.sendMailAction(values.email, values.username, values.message)
+    props.sendMailAction(values.email, values.username, values.message);
   };
 
   return (
@@ -71,9 +69,8 @@ const ContactUs = (props: IMailProps) => {
 };
 // export default ContactUs;
 
-
 const mapStateToProps = ({ mail }: IRootState) => ({
-  mail
+  mail,
 });
 
 const mapDispatchToProps = { sendMailAction };

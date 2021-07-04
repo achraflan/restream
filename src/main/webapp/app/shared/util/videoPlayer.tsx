@@ -44,5 +44,5 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
     }
   }, []);
 
-  return <video controls ref={playerVD => (player = playerVD)}></video>;
+  return <video controls autoPlay ref={playerVD => (player = playerVD)}></video>;
 }
