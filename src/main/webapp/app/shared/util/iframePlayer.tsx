@@ -9,6 +9,7 @@ export default function IframePlayer({ src }: IframePlayerProps) {
   return (
     <div className="container-iframe">
       <iframe
+        height="100%"
         className="responsive-iframe"
         src={src}
         title="Restream Player"
