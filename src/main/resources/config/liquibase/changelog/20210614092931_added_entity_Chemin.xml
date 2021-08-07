@@ -9,12 +9,12 @@
     <!--
         Added the entity Chemin.
     -->
-    <changeSet id="20210614092931-1" author="jhipster">
+    <changeSet id="20210614092931-1" author="jhipster" runOnChange="false">
         <createTable tableName="chemin">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="chemin_non" type="varchar(255)">
+            <column name="chemin_non" type="varchar(5000)">
                 <constraints nullable="true" />
             </column>
             <column name="type" type="varchar(255)">
@@ -46,6 +46,12 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
+    
+    <changeSet author="achraf" id="20210614092931-1-modify">
+        <modifyDataType columnName="chemin_non" newDataType="varchar(5000)" schemaName="restream" tableName="chemin" />
+    </changeSet>
+    
+
     <changeSet id="20210614092931-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/chemin.csv"
