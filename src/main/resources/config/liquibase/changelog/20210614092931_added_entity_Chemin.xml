@@ -48,7 +48,7 @@
     -->
     
     <changeSet author="achraf" id="20210614092931-1-modify">
-        <modifyDataType columnName="chemin_non" newDataType="varchar(5000)" schemaName="restream" tableName="chemin" />
+        <modifyDataType columnName="chemin_non" newDataType="varchar(5000)" schemaName="newrestream" tableName="chemin" />
     </changeSet>
     
 
